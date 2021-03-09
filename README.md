@@ -1,7 +1,7 @@
 # styled component
 ## 🎈 styled-component-by-sim-yoon
 - 🎬 movie introduction page
-- 📝 styled-componenet, useState, css animation
+- 📝 `styled-componenet`, `css animation`, `useState`
 
 <br>
 
@@ -14,13 +14,14 @@
 ## ✔ 구현할 기능 목록
 - [x] 컴포넌트 구조짜기 
 - **List Page**
-- [ ] 영화 포스터 나열하기
-- [ ] 한국영화, 외국영화 버튼 호버 모션
-- [ ] 한국영화, 외국영화 버튼 클릭시 구분에 맞는 포스터 출력
+- [x] 영화 포스터 나열하기
+- [x] 한국영화, 외국영화 버튼 호버 모션
+- [x] 한국영화, 외국영화 버튼 클릭시 구분에 맞는 포스터 출력
 - [ ] 포스터에 마우스 올렸을 때 포스터가 기울어지는 모션
+- [ ] 포스터 클릭시 detail 페이지 띄우기
 - [ ] (다크모드)
 - **Detail Page**
-- [ ] 클릭한 영화의 detail 페이지 띄우기
+- [ ] 클릭된 영화 정보 출력하기
 - [ ] 카드 hover시 뒤집는 모션과 함께 별점 보여주기
 - [ ] 나가기 버튼 모션
 - [ ] 좋아요, + 버튼 모션

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import MovieList from './components/MovieList';
-import PopUp from './components/PopUp';
+import MainPage from './pages/MainPage';
+import PopUp from './pages/PopUp';
 
 function App() {
   const [state, setState] = useState({
@@ -12,7 +12,7 @@ function App() {
     <>
       {state.state 
       ? <PopUp movie={state.movie} setState={setState}/> 
-      : <MovieList setState={setState} />}
+      : <MainPage setState={setState} />}
     </>
   );
 }

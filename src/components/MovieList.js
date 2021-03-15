@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import movieList from '../data/movieData';
-import useWindowSize from '../hooks/useWindowSize';
+import movieData from '../hooks/movieData';
+import Movie from './Movie';
 
 const MovieSwitch = styled.section`
     text-align: center;
@@ -11,7 +11,7 @@ const MovieSwitch = styled.section`
     div{
 	    overflow: hidden;
         color: #fff;
-        border-radius: 5px;
+        text-align: center;
         cursor: pointer;
         & + & {
             margin-left: 10px;
@@ -55,88 +55,74 @@ const MovieListBlock = styled.section`
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-`;
-
-const MovieBlock = styled.article`
-    display: inline-block;
-    color: #fff;
-    background-size: 200px;
-    width: 200px;
-    height: 300px;
-    margin: 0 10px 10px 0;
-    border-radius: 10px;
-	box-shadow: 0 0 16px #000; 
-    cursor: pointer;
-    
-    transform-style: preserve-3d;
-    transition: transform 0.02s linear;
-
-    ${({move, thumb}) =>  
-        // `transform: rotateY(${move.e}deg) rotateX(${move.n}deg);
-        `background-image: url('${thumb}')`
+    h1{
+        color: #fff;
+        margin: 0 0 3rem;
     }
 `;
-
-const Movie = ({movie, setState}) => {
-    const [move, setMove] = useState({ e: 0, n: 0 });
-    const size = useWindowSize();
-
-    const onmousemove = function(t) {
-        // console.log(t)
-        // console.log(size.width+','+size.height)
-        // console.log(t.pageX+','+t.pageY)
-        let e = -(size.width / 2 - t.pageX) / 30;
-        let n = (size.height / 2 - t.pageY) / 10;
-        setMove({ e: e, n: n });
-    }
-
-    const onmouseleave = function() {
-        setMove({ e: 0, n: 0 });
-    }
-
-    const onClick = () => {
-        setState({
-            state: true,
-            movie: movie
-        });
-    }
-
-    return(
-        <MovieBlock
-            onMouseMove={onmousemove} 
-            onMouseLeave={onmouseleave} 
-            onClick={onClick}
-            thumb={movie.thumb}
-            move={move}
-        />
-    );
-}
 
 const MovieList = ({setState}) => {
-    const [division, setDivision] = useState('all');
-
-    const onClick = (e) => {
-        setDivision(e.target.id);
+    const [division, setDivision] = useState(
+        {
+            id: 1,
+            nav_id: 'popular',
+            text: 'Popular',
+            title: '인기 영화'
+        }
+    );
+    const movieList = movieData(division.nav_id);
+ 
+    const navClick = (nav) => {
+        setDivision(nav);
     }
+        
+    const navList = [
+        {
+            id: 1,
+            nav_id: 'popular',
+            text: 'Popular',
+            title: '인기 영화'
+        },
+        {
+            id: 2,
+            nav_id: 'top_rated',
+            text: 'TopRated',
+            title: '높은 평점'
+        },
+        {
+            id: 3,
+            nav_id: 'now_playing',
+            text: 'NowPlaying',
+            title: '상영중인 영화'
+        },
+        {
+            id: 4,
+            nav_id: 'upcoming',
+            text: 'UpComing',
+            title: '개봉 예정'
+        }
+    ]
 
     return(
         <>
             <MovieSwitch>
-                <div><span data-hover="All" onClick={onClick} id='all'>All</span></div>
-                <div><span data-hover="Korean" onClick={onClick} id='k'>Korean</span></div>
-                <div><span data-hover="Foreign" onClick={onClick} id='f'>Foreign</span></div>
+                {navList.map((nav)=>
+                    <div key={nav.id}>
+                        <span data-hover={nav.text} onClick={()=>navClick(nav)}>{nav.text}</span>
+                    </div>
+                )}
             </MovieSwitch>
             <MovieListBlock>
-                {movieList.map((movie) => {
-                    if(division === 'all' || movie.division === division)
-                    return (
+                <h1>{division.title}</h1>
+                {(movieList !== null) &&
+                movieList.map((movie) => {
+                    return(
                         <Movie 
                             movie={movie} 
                             key={movie.id} 
                             setState={setState} 
                         />
-                    )
-                    else return false;
+                    );
                 })}
             </MovieListBlock>
         </>

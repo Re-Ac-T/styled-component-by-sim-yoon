@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import movieData from '../hooks/movieData';
-import Movie from './Movie';
+import MovieList from '../containers/MovieList';
 
 const MovieSwitch = styled.section`
     text-align: center;
@@ -50,18 +49,7 @@ const MovieSwitch = styled.section`
     }
 `;
 
-const MovieListBlock = styled.section`
-    padding: 20px;
-    box-sizing: border-box;
-    width: 100%;
-    text-align: center;
-    h1{
-        color: #fff;
-        margin: 0 0 3rem;
-    }
-`;
-
-const MovieList = ({setState}) => {
+const MainPage = ({setState}) => {
     const [division, setDivision] = useState(
         {
             id: 1,
@@ -70,7 +58,6 @@ const MovieList = ({setState}) => {
             title: '인기 영화'
         }
     );
-    const movieList = movieData(division.nav_id);
  
     const navClick = (nav) => {
         setDivision(nav);
@@ -101,7 +88,7 @@ const MovieList = ({setState}) => {
             text: 'UpComing',
             title: '개봉 예정'
         }
-    ]
+    ];
 
     return(
         <>
@@ -112,21 +99,9 @@ const MovieList = ({setState}) => {
                     </div>
                 )}
             </MovieSwitch>
-            <MovieListBlock>
-                <h1>{division.title}</h1>
-                {(movieList !== null) &&
-                movieList.map((movie) => {
-                    return(
-                        <Movie 
-                            movie={movie} 
-                            key={movie.id} 
-                            setState={setState} 
-                        />
-                    );
-                })}
-            </MovieListBlock>
+            <MovieList division={division} setState={setState}/>
         </>
     );
 }
 
-export default MovieList;
+export default MainPage;

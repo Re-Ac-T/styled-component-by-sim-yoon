@@ -1,24 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import SelectedMoviePoster from '../components/SelectedMoviePoster';
 
-const SelectedMoviePoster = styled.div`
-    position: absolute;
-    width: 398px;
-    height: 596px;
-    left: 193px;
-    top: 214px;
-
-    ${({thumb}) =>  
-        `background-image: url('https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${thumb}')`
-    }
+const MovieDetailBlock = styled.div`
+    margin: auto;
+    width: 65%;
 `;
 
 const SelectedMovieTitle = styled.div`
+    
+    display: inline-block;
     position: absolute;
-    width: 690px;
-    height: 58px;
-    left: 647px;
-    top: 214px;
+    margin: 100px 0 0 500px;
 
     font-family: arial;
     font-style: normal;
@@ -30,11 +23,10 @@ const SelectedMovieTitle = styled.div`
 `;
 
 const SelectedMovieDescription = styled.div`
-    position: absolute;
-    width: 565px;
-    height: 312px;
-    left: 647px;
-    top: 322px;
+    
+    display: inline-block;
+    margin: 200px 0 0 500px;
+
 
     font-family: arial;
     font-style: normal;
@@ -49,8 +41,9 @@ const ExitButton = styled.div`
     position: absolute;
     width: 23px;
     height: 42px;
-    left: 1397px;
-    top: 15px;
+    left: 90%;
+    bottom: 90%;
+    
 
     font-family: arial;
     font-style: normal;
@@ -69,17 +62,14 @@ const PopUp = ( {movie, setState} ) => {
             movie: {}
         });
     }
-
+    console.log(movie.vote_average);
     return (
-        <>
-            <SelectedMoviePoster thumb={movie.poster_path}/>
-            
-            <div>
-                <SelectedMovieTitle>{movie.title}</SelectedMovieTitle>
-                <SelectedMovieDescription>{movie.overview}</SelectedMovieDescription>
-            </div>
+        <MovieDetailBlock>
+            <SelectedMoviePoster movie={movie} thumb={movie.poster_path} num={movie.vote_average}/>    
+            <SelectedMovieTitle>{movie.title}</SelectedMovieTitle>
+            <SelectedMovieDescription>{movie.overview}</SelectedMovieDescription>
             <ExitButton onClick={Exit} children="X"/>
-        </>
+        </MovieDetailBlock>
     );
 }
 

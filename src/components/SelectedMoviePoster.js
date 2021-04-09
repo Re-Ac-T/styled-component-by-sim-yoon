@@ -68,6 +68,7 @@ const SelectedMoviePoster = ({ num, thumb }) => {
                     isFlipped={isFlipped}
                     brightness={brightness}
                 >
+                    <div>{num}</div>
                     <HalfRating
                         num={num}
                     />

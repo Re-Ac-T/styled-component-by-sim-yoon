@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import SelectedMoviePoster from '../components/SelectedMoviePoster';
+import './PopUp.css';
 
 const MovieDetailBlock = styled.div`
-    margin: auto;
-    width: 65%;
+    margin: 3% auto 3% auto;
+    width: 80%;
 `;
 
 const SelectedMovieTitle = styled.div`
-    
     display: inline-block;
-    position: absolute;
-    margin: 100px 0 0 500px;
 
     font-family: arial;
     font-style: normal;
@@ -23,10 +21,7 @@ const SelectedMovieTitle = styled.div`
 `;
 
 const SelectedMovieDescription = styled.div`
-    
     display: inline-block;
-    margin: 200px 0 0 500px;
-
 
     font-family: arial;
     font-style: normal;
@@ -65,9 +60,15 @@ const PopUp = ( {movie, setState} ) => {
     console.log(movie.vote_average);
     return (
         <MovieDetailBlock>
-            <SelectedMoviePoster movie={movie} thumb={movie.poster_path} num={movie.vote_average}/>    
-            <SelectedMovieTitle>{movie.title}</SelectedMovieTitle>
-            <SelectedMovieDescription>{movie.overview}</SelectedMovieDescription>
+            <div className="grid">
+                <div>
+                    <SelectedMoviePoster movie={movie} thumb={movie.poster_path} num={movie.vote_average}/>    
+                </div>
+                <div>
+                    <SelectedMovieTitle>{movie.title}</SelectedMovieTitle>
+                    <SelectedMovieDescription>{movie.overview}</SelectedMovieDescription>
+                </div>
+            </div>
             <ExitButton onClick={Exit} children="X"/>
         </MovieDetailBlock>
     );

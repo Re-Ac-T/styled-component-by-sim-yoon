@@ -4,8 +4,6 @@ import ReactCardFlip from 'react-card-flip';
 import HalfRating from './Rating';
 
 const SelectedMovieCardFront = styled.div`
-    position: absolute;
-    margin: 100px 0 0 0px;
     width: 400px;
     height: 600px;
     display: inline-block;
@@ -22,8 +20,6 @@ const SelectedMovieCardFront = styled.div`
 `;
 
 const SelectedMovieCardBack = styled.div`
-    position: absolute;
-    margin: 100px 0 0 0px;
     width: 400px;
     height: 600px;
     display: inline-block;
@@ -52,7 +48,7 @@ const SelectedMoviePoster = ({ num, thumb }) => {
     };
 
     return (
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
             <div>
                 <SelectedMovieCardFront
                     onMouseMove={onMouseMove}
@@ -71,8 +67,8 @@ const SelectedMoviePoster = ({ num, thumb }) => {
                     onClick={onPosterClick}
                     isFlipped={isFlipped}
                     brightness={brightness}
-                    thumb={thumb}
                 >
+                    <div>{num}</div>
                     <HalfRating
                         num={num}
                     />
